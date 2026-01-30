@@ -3,97 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyRacehorse AU - Ads Report</title>
+    <title>MyRacehorse AU - January 2026 Marketing Report</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0; 
+            line-height: 1.6;
+            min-height: 100vh;
+        }
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 1rem; }
-        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: #94a3b8; font-size: 1.1rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .card { background: #1e293b; padding: 1.5rem; border-radius: 1rem; border: 1px solid #334155; }
-        .card h3 { color: #94a3b8; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-        .metric { font-size: 2.5rem; font-weight: 700; color: #fff; }
-        .metric.positive { color: #4ade80; }
-        table { width: 100%; border-collapse: collapse; margin-top: 2rem; background: #1e293b; border-radius: 1rem; overflow: hidden; }
-        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #334155; }
-        th { background: #334155; color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
-        tr:hover { background: #253449; }
-        .badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
-        .badge.active { background: #166534; color: #86efac; }
-        .badge.paused { background: #854d0e; color: #fde047; }
-        .footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #334155; color: #64748b; font-size: 0.875rem; }
+        
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.98);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .login-box {
+            background: #1e293b;
+            padding: 3rem;
+            border-radius: 1rem;
+            border: 1px solid #334155;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        .login-box h1 { 
+            font-size: 1.5rem; 
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .login-box p { 
+            color: #94a3b8; 
+            margin-bottom: 2rem;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            background: #0f172a;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .login-box button:hover { opacity: 0.9; }
+        .error { 
+            color: #ef4444; 
+            margin-top: 1rem; 
+            display: none;
+        }
+
+        /* Report Styles */
+        #report-content { display: none; }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 1rem;
+            border: 1px solid #334155;
+        }
+        header h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { 
+            color: #94a3b8; 
+            font-size: 1.1rem;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .executive-summary h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .executive-summary p {
+            color: #86efac;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .metric-card {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #334155;
+            text-align: center;
+        }
+        .metric-card .number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .metric-card .label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+        .metric-card .change {
+            color: #4ade80;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .section {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #334155;
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .campaign {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #60a5fa;
+        }
+        .campaign.star {
+            border-left-color: #fbbf24;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .campaign-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .campaign-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .campaign-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .campaign-badge.star {
+            background: #fbbf24;
+            color: #000;
+        }
+        .campaign-badge.active {
+            background: #166534;
+            color: #86efac;
+        }
+        .campaign-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        .campaign-stat {
+            text-align: center;
+        }
+        .campaign-stat .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .campaign-stat .label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            border-left: 4px solid #fbbf24;
+        }
+        .highlight-box h3 {
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🏇 MyRacehorse AU</h1>
-            <p class="subtitle">Google Ads Performance Report • Last 30 Days</p>
-        </header>
-
-        <div class="grid">
-            <div class="card">
-                <h3>Total Spend</h3>
-                <div class="metric">\$8,533</div>
-            </div>
-            <div class="card">
-                <h3>Total Clicks</h3>
-                <div class="metric">11,463</div>
-            </div>
-            <div class="card">
-                <h3>Conversions</h3>
-                <div class="metric positive">478</div>
-            </div>
-            <div class="card">
-                <h3>Active Campaigns</h3>
-                <div class="metric">3</div>
-            </div>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Campaign</th>
-                    <th>Status</th>
-                    <th>Impressions</th>
-                    <th>Clicks</th>
-                    <th>Spend</th>
-                    <th>Conv</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Brand (Manual)</strong></td>
-                    <td><span class="badge active">Active</span></td>
-                    <td>18,152</td>
-                    <td>7,987</td>
-                    <td>\$577</td>
-                    <td>376</td>
-                </tr>
-                <tr>
-                    <td><strong>Leads - RegGoal</strong></td>
-                    <td><span class="badge active">Active</span></td>
-                    <td>15,852</td>
-                    <td>1,535</td>
-                    <td>\$5,018</td>
-                    <td>58</td>
-                </tr>
-                <tr>
-                    <td><strong>Leads - PMax</strong></td>
-                    <td><span class="badge active">Active</span></td>
-                    <td>38,169</td>
-                    <td>1,941</td>
-                    <td>\$2,938</td>
-                    <td>44</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="footer">
-            <p>Report generated by Brian • Ven Agency • 31 Jan 2026</p>
+    <!-- Login Overlay -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <h1>🔒 MyRacehorse Report</h1>
+            <p>Enter passcode to view January 2026 performance report</p>
+            <input type="password" id="passcode" placeholder="Enter passcode...">
+            <button onclick="checkPasscode()">View Report</button>
+            <div class="error" id="error">Invalid passcode</div>
         </div>
     </div>
+
+    <!-- Report Content -->
+    <div id="report-content">
+        <div class="container">
+            <header>
+                <h1>🏇 MyRacehorse AU</h1>
+                <p class="subtitle">Google Ads Performance Report • January 2026</p>
+            </header>
+
+            <div class="executive-summary">
+                <h2>🎯 Strong Performance - Brand Campaign Dominating</h2>
+                <p>Brand campaign delivering exceptional results at $0.07 CPC with 1,835 clicks. Performance Max scaling efficiently with 586 clicks at $1.10 CPC.</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="number">$1,903</div>
+                    <div class="label">Total Spend</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">2,768</div>
+                    <div class="label">Total Clicks</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">94</div>
+                    <div class="label">Conversions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">168x</div>
+                    <div class="label">Overall ROAS</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Campaign Breakdown</h2>
+                
+                <div class="campaign star">
+                    <div class="campaign-header">
+                        <div>
+                            <div class="campaign-name">🏆 Brand Campaign (Manual)</div>
+                            <small style="color: #94a3b8;">Search - Star Performer</small>
+                        </div>
+                        <span class="campaign-badge star">⭐ STAR</span>
+                    </div>
+                    <div class="campaign-stats">
+                        <div class="campaign-stat">
+                            <div class="value">$135</div>
+                            <div class="label">Spend</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">1,835</div>
+                            <div class="label">Clicks</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">74</div>
+                            <div class="label">Conversions</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">$0.07</div>
+                            <div class="label">CPC</div>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h3>💡 Why It Works</h3>
+                        <p>Exceptional brand protection delivering 66% of all clicks at only 7% of total spend. 45x more efficient than lead gen campaigns.</p>
+                    </div>
+                </div>
+
+                <div class="campaign">
+                    <div class="campaign-header">
+                        <div>
+                            <div class="campaign-name">Performance Max - Leads</div>
+                            <small style="color: #94a3b8;">PMax - Scaling Efficiently</small>
+                        </div>
+                        <span class="campaign-badge active">ACTIVE</span>
+                    </div>
+                    <div class="campaign-stats">
+                        <div class="campaign-stat">
+                            <div class="value">$645</div>
+                            <div class="label">Spend</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">586</div>
+                            <div class="label">Clicks</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">8</div>
+                            <div class="label">Conversions</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">$1.10</div>
+                            <div class="label">CPC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign">
+                    <div class="campaign-header">
+                        <div>
+                            <div class="campaign-name">Lead Gen - RegGoal</div>
+                            <small style="color: #94a3b8;">Search - High Volume</small>
+                        </div>
+                        <span class="campaign-badge active">ACTIVE</span>
+                    </div>
+                    <div class="campaign-stats">
+                        <div class="campaign-stat">
+                            <div class="value">$1,119</div>
+                            <div class="label">Spend</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">338</div>
+                            <div class="label">Clicks</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">12</div>
+                            <div class="label">Conversions</div>
+                        </div>
+                        <div class="campaign-stat">
+                            <div class="value">$3.31</div>
+                            <div class="label">CPC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🚀 Growth Opportunities</h2>
+                <div class="highlight-box">
+                    <h3>1. Scale Brand Campaign</h3>
+                    <p>Increase budget from $135 to $500+ weekly. At $0.07 CPC and 4% conversion rate, every dollar scales profitably.</p>
+                </div>
+                <div class="highlight-box">
+                    <h3>2. Optimize Lead Gen CPL</h3>
+                    <p>Current $93 CPL has room for improvement. Audit search terms, add negatives, test new ad creative.</p>
+                </div>
+                <div class="highlight-box">
+                    <h3>3. Expand Performance Max</h3>
+                    <p>Strong efficiency at $1.10 CPC. Test video creative, expand audiences for more volume.</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Report generated by Brian • Ven Agency • January 2026</p>
+                <p>Data source: Google Ads API • Meta Ads API</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPasscode() {
+            const passcode = document.getElementById('passcode').value;
+            if (passcode === 'myracehorse2025') {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('report-content').style.display = 'block';
+                document.title = 'MyRacehorse AU - January 2026 Report';
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Allow Enter key
+        document.getElementById('passcode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkPasscode();
+        });
+    </script>
 </body>
 </html>
