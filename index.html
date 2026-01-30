@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ven Agency - Client Reports</title>
+    <title>Ven Agency Reports</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
             background: #0f172a; 
@@ -14,92 +13,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
-        .login-box {
-            background: #1e293b;
-            padding: 3rem;
-            border-radius: 1rem;
-            border: 1px solid #334155;
-            max-width: 400px;
-            width: 90%;
-        }
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-        p {
-            color: #94a3b8;
-            margin-bottom: 2rem;
-        }
-        input {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #334155;
-            border-radius: 0.5rem;
-            background: #0f172a;
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        input:focus {
-            outline: none;
-            border-color: #60a5fa;
-        }
-        button {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 0.5rem;
-            background: #60a5fa;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #3b82f6;
-        }
-        .error {
-            color: #ef4444;
-            margin-top: 1rem;
-            display: none;
-        }
+        h1 { color: #64748b; }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <h1>🔒 Client Reports</h1>
-        <p>Enter your access token to view your report</p>
-        <input type="password" id="token" placeholder="Enter access token...">
-        <button onclick="login()">Access Report</button>
-        <div class="error" id="error">Invalid token</div>
-    </div>
-
-    <script>
-        // Client tokens (in production, verify server-side)
-        const clients = {
-            'mrh-2024-secure': 'myracehorse',
-            'hacker-2024-secure': 'hacker',
-            'aes-2024-secure': 'aes',
-            'katia-2024-secure': 'bykatia'
-        };
-
-        function login() {
-            const token = document.getElementById('token').value;
-            const client = clients[token];
-            
-            if (client) {
-                window.location.href = '/' + client + '/';
-            } else {
-                document.getElementById('error').style.display = 'block';
-            }
-        }
-
-        // Allow Enter key
-        document.getElementById('token').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') login();
-        });
-    </script>
+    <h1>Ven Agency Client Reports</h1>
 </body>
 </html>
