@@ -1,0 +1,5 @@
+name = "ven-reports"
+compatibility_date = "2026-01-30"
+
+[site]
+bucket = "."
